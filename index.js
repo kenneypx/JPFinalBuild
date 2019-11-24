@@ -1,0 +1,1 @@
+const Variab = 12
