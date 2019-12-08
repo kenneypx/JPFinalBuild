@@ -2,13 +2,17 @@
   "name": "journeyplan",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "server": "nodemon server.js",
+    "client": "npm start --prefix client",
+    "clientinstall": "npm install --prefix client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kenneypx/journeyplan.git"
+    "url": "https://github.com/kenneypx/journeyplan.git"
   },
   "author": "",
   "license": "ISC",
@@ -22,6 +26,7 @@
     "body-parser": "^1.19.0",
     "express": "^4.17.1",
     "fs": "0.0.1-security",
+    "fs-extra": "^8.1.0",
     "git": "^0.1.5",
     "moment": "^2.24.0",
     "mongodb": "^3.3.3",
@@ -36,5 +41,8 @@
     "tedious": "^6.6.0",
     "xlsx": "^0.15.1",
     "xoauth2": "^1.2.0"
+  },
+  "devDependencies": {
+    "concurrently": "^5.0.0"
   }
 }

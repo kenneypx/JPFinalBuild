@@ -27,18 +27,29 @@ function getreps(){
                 let Outlets = []
                 reps = result.recordset
                // console.log(reps)
-                let lastRep = reps[0].SalesRep
+              var lastRep = reps[0].SalesRep
+               
+
+                console.log(lastRep)
                  for(let counter=0; counter<reps.length;counter++){
+                  // console.log(reps[counter].SalesRep)
                      if (reps[counter].SalesRep === lastRep){
                             Outlets.push([reps[counter].OutletID, reps[counter].OutletName,reps[counter].CallRate,reps[counter].Address])
                           //  console.log (reps[counter].OutletID )
                      } else{
-                        
+
+                       
                       // const data =  XLSX.utils.sheet_to_json(worksheet)
                       // console.log(worksheet)
-                       salespersonID = Outlets[0][0]
-                       let Year = 2019
-                       let Month = 12
+                     // console.log(Outlets[0])
+                      let salespersonID = lastRep
+                      // salespersonID = Outlets[0][0]
+                       console.log(salespersonID)
+                       var d = new Date();
+                       
+                       let Year = d.getFullYear()
+                       let Month = d.getMonth() + 1
+                       //console.log(Year, Month)
                        let rows = Outlets.length + 5
                        const OutDir = 'C:/Projects/JourneyPlan_NODE/Download/'
 
@@ -51,7 +62,7 @@ function getreps(){
                         let filename = salespersonID + '_' +Year.toString() + Month.toString()+'.xlsm'
                         XLSX.writeFile(workbook,OutDir+ filename,{template: true});
                         lastRep = reps[counter].SalesRep
-                        Outlets= []
+                       
                        // console.log(filename)
                      }
 

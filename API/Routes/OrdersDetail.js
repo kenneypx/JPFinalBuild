@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const sql = require('mssql/msnodesqlv8')
+const {ConnectionPool} = require('mssql')
 const dbconfig = require('../SQLFunctions/config')
 
 
@@ -8,17 +8,20 @@ let config = dbconfig.config
 
 router.get('/', (req, res, next) => {
     
-    let userid = req.query.UserID
-    let password = req.query.Password
-    //console.log(req)
-    sql.connect(config).then(pool => {
-        return pool.request()
-        .input('Username', sql.NVarChar(10), userid)
-        .input('Password', sql.NVarChar(10), password)
+  let UserID = req.query.UserID
+  let OrderID = req.query.OrderID
+  let WithDetail = req.query.WithDetail
+  const sql = new ConnectionPool(config)
+   sql.connect().then(pool => {
+   // sql.connect(config).then(pool => {
+         return pool.request()
+         .input('UserID',UserID)
+        .input('OrderID', OrderID)
+        .input('WithDetail',  WithDetail)
        // .output('Return',sql.Int)
-        .execute('sp_DT_CheckAuth')
+        .execute('sp_OrdersDetail')
      }).then(result => {  
-        console.dir(result)
+        //console.dir(result)
         res.status(200).json
         ({message: result.recordset})
         sql.close()
@@ -34,10 +37,6 @@ router.get('/', (req, res, next) => {
     
 })
 
-sql.on('error', err => {
-    sql.close()
-    console.log(err)
-})
    
 
 module.exports = router;

@@ -44,7 +44,8 @@ router.post('/', (req, res, next) => {
        }).catch(err => {
           console.log(err)
           res.status(400).json
-          ({ message: 'Error Returned' })
+          ({ message: 'Error Returned',
+          detail:err})
           sql.close()
        })
      

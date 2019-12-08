@@ -5,6 +5,7 @@ const cron= require('node-cron')
 const nodemailerControl = require('./Functions/nodemailerControl')
 const jpFunctions= require('./Functions/BaseFunctions')
 const ExcelBuild = require('./Functions/createExcel')
+const fs = require('fs-extra')
 
 const opts = {
     errorEventName:'error',
@@ -71,12 +72,25 @@ cron.schedule("4 1 1 * * *",function() {
    // console.log('Running ' + ltime )
 })
 
-
-cron.schedule("20 1 * * * *",function() {
+cron.schedule("5 * 1-16 * *",function() {
    // get the list of Reps
    console.log('Generate started') 
    ExcelBuild.BuildExcel()
    //Create the Excel Sheets and place in the Folder
 
 })
+
+
+cron.schedule("1 * 1 * *",function() {
+    // get the list of Reps
+    fs.emptyDir('C:/Projects/JourneyPlan_NODE/Download/')
+    .then(() => {
+        console.log('Empty Folder Success')
+      })
+      .catch(err => {
+        console.error(err)
+      })    
+    //Create the Excel Sheets and place in the Folder
+ 
+ })
 module.exports = app;

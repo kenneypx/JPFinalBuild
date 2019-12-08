@@ -124,7 +124,7 @@ function Secondsheet(){
   }).then(result => {  
      //console.dir(result)
     console.log('completed')
-    movefile()
+    movefile(filename)
      sql.close()
   }).catch(err => {
      console.log(err)
@@ -135,7 +135,7 @@ function Secondsheet(){
   
   }
 
-  function movefile(){
+  function movefile(filename){
         fs.copyFileSync(filename,'../Files/Inbound/Processed',)
 
   }
