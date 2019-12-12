@@ -1,7 +1,7 @@
 const sql = require('mssql/msnodesqlv8')
 const XLSX = require('@sheet/edit')
 const dbconfig = require('../API/SQLFunctions/config')
-
+const moment = require('moment')
 
 let config = dbconfig.config
 
@@ -34,7 +34,7 @@ function getreps(){
                  for(let counter=0; counter<reps.length;counter++){
                   // console.log(reps[counter].SalesRep)
                      if (reps[counter].SalesRep === lastRep){
-                            Outlets.push([reps[counter].OutletID, reps[counter].OutletName,reps[counter].CallRate,reps[counter].Address])
+                            Outlets.push([reps[counter].OutletID, reps[counter].OutletName,reps[counter].CallRate,reps[counter].Addr1,reps[counter].Addr2,reps[counter].Postcode, ,reps[counter].OutletType])
                           //  console.log (reps[counter].OutletID )
                      } else{
 
@@ -46,9 +46,10 @@ function getreps(){
                       // salespersonID = Outlets[0][0]
                        console.log(salespersonID)
                        var d = new Date();
-                       
-                       let Year = d.getFullYear()
-                       let Month = d.getMonth() + 1
+
+                       let planDate = moment().add(1, 'months').calendar();
+                       let Year = planDate.getFullYear()
+                       let Month = planDate.getMonth() 
                        //console.log(Year, Month)
                        let rows = Outlets.length + 5
                        const OutDir = 'C:/Projects/JourneyPlan_NODE/Download/'
@@ -58,7 +59,7 @@ function getreps(){
                        XLSX.utils.template_set_aoa(workbook, Summary, "T5", [[Year]]);
                        XLSX.utils.template_set_aoa(workbook, Summary, "S7", [[Month]]);
                        let range =  {s:{r:5,c:51},e:{r:5,c:54}}
-                        XLSX.utils.template_set_aoa(workbook,JP, {s:{r:5,c:51},e:{r:rows,c:55}},Outlets);
+                        XLSX.utils.template_set_aoa(workbook,JP, {s:{r:5,c:51},e:{r:rows,c:58}},Outlets);
                         let filename = salespersonID + '_' +Year.toString() + Month.toString()+'.xlsm'
                         XLSX.writeFile(workbook,OutDir+ filename,{template: true});
                         lastRep = reps[counter].SalesRep
@@ -82,9 +83,11 @@ function getreps(){
 
 
     exports.BuildExcel = function () {
+      fs.unlink('C:/Projects/JourneyPlan_NODE/Download/', (err) => {
+        if (err) throw err;
+        console.log('successfully deleted Downloads Folder');
+      });
 
          getreps()
-            
-    
-        
+
     }

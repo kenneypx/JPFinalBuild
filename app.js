@@ -72,7 +72,7 @@ cron.schedule("4 1 1 * * *",function() {
    // console.log('Running ' + ltime )
 })
 
-cron.schedule("5 * 1-16 * *",function() {
+cron.schedule("0 21 15 * *",function() {
    // get the list of Reps
    console.log('Generate started') 
    ExcelBuild.BuildExcel()
