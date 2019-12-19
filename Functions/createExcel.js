@@ -1,3 +1,4 @@
+const fs = require('fs')
 const sql = require('mssql/msnodesqlv8')
 const XLSX = require('@sheet/edit')
 const dbconfig = require('../API/SQLFunctions/config')
@@ -16,7 +17,7 @@ function getreps(){
                 return pool.request()
                 .execute('sp_DT_GetOutletsbyRep')
              }).then(result => {  
-              // console.dir(result)
+              // console.dir(result)1
                 sql.close()
                 console.log('opening Template')
                 const workbook = XLSX.readFile('C:/Projects/JourneyPlan_NODE/Functions/Template/Template.xlsm', { bookVBA: true , cellDates:true ,template:true});
@@ -48,8 +49,9 @@ function getreps(){
                        var d = new Date();
 
                        let planDate = moment().add(1, 'months').calendar();
-                       let Year = planDate.getFullYear()
-                       let Month = planDate.getMonth() 
+                       let Year = 2020
+                       let Month = 1
+                       //let PlanID = 8272
                        //console.log(Year, Month)
                        let rows = Outlets.length + 5
                        const OutDir = 'C:/Projects/JourneyPlan_NODE/Download/'
@@ -58,12 +60,13 @@ function getreps(){
                        XLSX.utils.template_set_aoa(workbook, Summary, "D3", [[salespersonID]]);
                        XLSX.utils.template_set_aoa(workbook, Summary, "T5", [[Year]]);
                        XLSX.utils.template_set_aoa(workbook, Summary, "S7", [[Month]]);
+                      // XLSX.utils.template_set_aoa(workbook, Summary, "I2", [[PlanID]]);
                        let range =  {s:{r:5,c:51},e:{r:5,c:54}}
                         XLSX.utils.template_set_aoa(workbook,JP, {s:{r:5,c:51},e:{r:rows,c:58}},Outlets);
                         let filename = salespersonID + '_' +Year.toString() + Month.toString()+'.xlsm'
                         XLSX.writeFile(workbook,OutDir+ filename,{template: true});
                         lastRep = reps[counter].SalesRep
-                       
+                        Outlets = []
                        // console.log(filename)
                      }
 
@@ -83,10 +86,10 @@ function getreps(){
 
 
     exports.BuildExcel = function () {
-      fs.unlink('C:/Projects/JourneyPlan_NODE/Download/', (err) => {
-        if (err) throw err;
-        console.log('successfully deleted Downloads Folder');
-      });
+   //  fs.unlink('C:/Projects/JourneyPlan_NODE/Download/', (err) => {
+   //   if (err) throw err;
+      //  console.log('successfully deleted Downloads Folder');
+   //   });
 
          getreps()
 

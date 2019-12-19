@@ -4,11 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
+    "comstart": "concurrently \"npm run server\" \"npm run client\"",
     "start": "node server.js",
-    "server": "nodemon server.js",
-    "client": "npm start --prefix client",
-    "clientinstall": "npm install --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "server": "node server.js",
+    "client": "npm start --prefix journey-plan",
+    "clientinstall": "npm install --prefix journey-plan",
+    "dev": "concurrently \"npm start\" \"npm run client\""
   },
   "repository": {
     "type": "git",
@@ -28,6 +29,7 @@
     "fs": "0.0.1-security",
     "fs-extra": "^8.1.0",
     "git": "^0.1.5",
+    "https": "^1.0.0",
     "moment": "^2.24.0",
     "mongodb": "^3.3.3",
     "msnodesqlv8": "^0.8.4",

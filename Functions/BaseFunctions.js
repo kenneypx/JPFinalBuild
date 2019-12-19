@@ -122,15 +122,15 @@ exports.HeaderFormat = function(lmonth, lyear){
          //   console.log (lstr + ldays)
          // JPHeaderline.push(lstr + + ldays )
          //  appliedstyle = (daycount===0||daycount===6) ? WeekendStyle : WeekdayStyle 
-           datestr = {...datestr, [i+5]:lstr}
-           daystr={...daystr,[i+5]:ldays.substr(0,2)}
-           colourstr={...colourstr,[i+5]:'GREY'}
+           datestr = {...datestr, [i+6]:lstr}
+           daystr={...daystr,[i+6]:ldays.substr(0,2)}
+           colourstr={...colourstr,[i+6]:'GREY'}
 
           // console.log(lmonthstr,lstr)
-           HeaderDate={...HeaderDate,[i+5]:lyear.toString().concat(lmonthstr,lstr)}
-           Startdate={...Startdate,[i+5]:startdatestr}
+           HeaderDate={...HeaderDate,[i+6]:lyear.toString().concat(lmonthstr,lstr)}
+           Startdate={...Startdate,[i+6]:startdatestr}
            headercols.push ({header:padding( dayslastmonth -daystofill,'0',2), key: 'coll'+ i , width: 3 })
-           Enddate = {...Enddate,[i+5]:enddatestr}
+           Enddate = {...Enddate,[i+6]:enddatestr}
            /* style: { font: { name: 'Arial Black' } } */
           // Headerline.push ( dayslastmonth -daystofill)
            daystofill -= 1
@@ -141,12 +141,12 @@ exports.HeaderFormat = function(lmonth, lyear){
             var lmonthstr = padding(lmonth,'0',2)
         //    console.log (lstr + ' ' + ldays)
            // JPHeaderline.push(lstr + ' ' + ldays  )
-           datestr = {...datestr, [i+5]:lstr}
-           daystr={...daystr,[i+5]:ldays.substr(0,2)}
-           colourstr={...colourstr,[i+5]:ldays.substr(3,7)}
-           HeaderDate={...HeaderDate,[i+5]:lyear.toString().concat(lmonthstr,lstr)}
-           Startdate={...Startdate,[i+5]:startdatestr}
-           Enddate = {...Enddate,[i+5]:enddatestr}
+           datestr = {...datestr, [i+6]:lstr}
+           daystr={...daystr,[i+6]:ldays.substr(0,2)}
+           colourstr={...colourstr,[i+6]:ldays.substr(3,7)}
+           HeaderDate={...HeaderDate,[i+6]:lyear.toString().concat(lmonthstr,lstr)}
+           Startdate={...Startdate,[i+6]:startdatestr}
+           Enddate = {...Enddate,[i+6]:enddatestr}
           //  appliedstyle = (daycount===0||daycount===6) ? WeekendStyle : WeekdayStyle 
            headercols.push ({header: padding(daycounter,'0',2), key: 'coll'+ i , width: 3})  
            //  Headerline.push( daycounter.toString())
@@ -159,12 +159,12 @@ exports.HeaderFormat = function(lmonth, lyear){
         // JPHeaderline.push (lstr + ' ' + ldays)
         //  appliedstyle = (daycount===0||daycount===6) ? WeekendStyle : WeekdayStyle 
            headercols.push ({header: padding(spacefiller,'0',2) , key: 'coll'+ i , width: 3})
-           datestr = {...datestr, [i+5]:lstr}
-           daystr={...daystr,[i+5]:ldays.substr(0,2)}
-           colourstr={...colourstr,[i+5]:'GREY'}
-           HeaderDate={...HeaderDate,[i+5]:nextyear.toString().concat(lmonthstr,lstr)}
-           Startdate={...Startdate,[i+5]:startdatestr}
-           Enddate = {...Enddate,[i+5]:enddatestr}
+           datestr = {...datestr, [i+6]:lstr}
+           daystr={...daystr,[i+6]:ldays.substr(0,2)}
+           colourstr={...colourstr,[i+6]:'GREY'}
+           HeaderDate={...HeaderDate,[i+6]:nextyear.toString().concat(lmonthstr,lstr)}
+           Startdate={...Startdate,[i+6]:startdatestr}
+           Enddate = {...Enddate,[i+6]:enddatestr}
            //Headerline.push( spacefiller.toString())
            spacefiller +=1
        }

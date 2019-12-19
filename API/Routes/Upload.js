@@ -3,25 +3,26 @@ const router = express.Router();
 const multer = require('multer')
 const ExcelReader = require('../../Functions/ReadExcel')
 
-const fileFilter= (req,fileFilter,cb)=>{
-    if(fileFilter.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
-        cb(null,true)
-    } else {
-        cb(null,false)
-    }
-}
+//const fileFilter= (req,fileFilter,cb)=>{
+ //   if(fileFilter.mimetype === 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'){
+//        cb(null,true)
+//    } else {
+//        cb(null,false)
+//    }
+//}
 
 const storage = multer.diskStorage({
     destination: function(req,file,callback){
-        callback(null,'upload/')
+        callback(null,'./Files/Inbound/')
     },
     filename:function(req,file,callback){
         callback(null,file.originalname)
     }
 })
 
-const upload = multer({storage:storage,
-fileFilter:fileFilter
+const upload = multer({storage:storage
+    //,
+//fileFilter:fileFilter
 })
 
 

@@ -71,7 +71,7 @@ cron.schedule("4 1 1 * * *",function() {
      ltime = ldate.getTime().toString()
    // console.log('Running ' + ltime )
 })
-
+//cron.schedule("0 21 15 * *",function() {
 cron.schedule("0 21 15 * *",function() {
    // get the list of Reps
    console.log('Generate started') 
