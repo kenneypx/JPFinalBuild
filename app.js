@@ -81,7 +81,7 @@ cron.schedule("0 21 15 * *",function() {
 })
 
 
-cron.schedule("1 * 1 * *",function() {
+cron.schedule("0 1 1 * *",function() {
     // get the list of Reps
     fs.emptyDir('C:/Projects/JourneyPlan_NODE/Download/')
     .then(() => {

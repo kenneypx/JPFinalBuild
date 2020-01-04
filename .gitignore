@@ -4,4 +4,8 @@ Upload/
 
 node_modules/
 journey-plan/
+certs/
+cert2/
+cert3/
+cert4/
 .DS_Store
